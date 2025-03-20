@@ -1,6 +1,5 @@
 ## EX. NO:2 IMPLEMENTATION OF PLAYFAIR CIPHER
 
- 
 ##  Name  : J.JANANI
 
 ## Reg No : 212223230085
@@ -26,9 +25,13 @@ To encrypt a message, one would break the message into digrams (groups of 2 lett
 ## ALGORITHM:
 
 STEP-1: Read the plain text from the user.
+
 STEP-2: Read the keyword from the user.
+
 STEP-3: Arrange the keyword without duplicates in a 5*5 matrix in the row order and fill the remaining cells with missed out letters in alphabetical order. Note that ‘i’ and ‘j’ takes the same cell.
+
 STEP-4: Group the plain text in pairs and match the corresponding corner letters by forming a rectangular grid.
+
 STEP-5: Display the obtained cipher text.
 
 
@@ -48,7 +51,7 @@ void generateKeyMatrix(char key[], char matrix[SIZE][SIZE]) {
     int i, j, k = 0;
     char current;
 
-    // Remove duplicates and replace 'J' with 'I'
+    
     for (i = 0; key[i] != '\0'; i++) {
         current = toupper(key[i]);
         if (current == 'J') current = 'I';
@@ -59,7 +62,7 @@ void generateKeyMatrix(char key[], char matrix[SIZE][SIZE]) {
     }
     key[k] = '\0';
 
-    // Fill matrix with key characters and remaining alphabet
+    
     i = 0; k = 0;
     for (int row = 0; row < SIZE; row++) {
         for (int col = 0; col < SIZE; col++) {
@@ -99,7 +102,7 @@ void processDigraph(char a, char b, char matrix[SIZE][SIZE], char *resA, char *r
     if (row1 == row2) {  // Same row
         *resA = matrix[row1][(col1 + (encrypt ? 1 : SIZE - 1)) % SIZE];
         *resB = matrix[row2][(col2 + (encrypt ? 1 : SIZE - 1)) % SIZE];
-    } else if (col1 == col2) {  // Same column
+    } else if (col1 == col2) {  
         *resA = matrix[(row1 + (encrypt ? 1 : SIZE - 1)) % SIZE][col1];
         *resB = matrix[(row2 + (encrypt ? 1 : SIZE - 1)) % SIZE][col2];
     } else {  // Rectangle swap
@@ -131,8 +134,8 @@ void encryptDecryptText(char *text, char matrix[SIZE][SIZE], int encrypt) {
         char b = (i + 1 < len) ? text[i + 1] : 'X';
 
         if (a == b) {
-            b = 'X';  // Insert 'X' between identical letters
-            i--;      // Re-evaluate second character
+            b = 'X';  
+            i--;      
         }
 
         char resA, resB;
@@ -168,10 +171,10 @@ int main() {
     generateKeyMatrix(key, matrix);
     printMatrix(matrix);
 
-    encryptDecryptText(text, matrix, 1);  // Encrypt
+    encryptDecryptText(text, matrix, 1);  
     printf("Encrypted Text: %s\n", text);
 
-    encryptDecryptText(text, matrix, 0);  // Decrypt
+    encryptDecryptText(text, matrix, 0);  
     printf("Decrypted Text: %s\n", text);
 
     return 0;
